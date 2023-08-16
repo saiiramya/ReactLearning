@@ -1,0 +1,25 @@
+{
+  "name": "react-learning",
+  "version": "1.0.0",
+  "description": "This is my react learning workspace",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saiiramya/ReactLearning.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "ramya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saiiramya/ReactLearning/issues"
+  },
+  "homepage": "https://github.com/saiiramya/ReactLearning#readme",
+  "devDependencies": {
+    "parcel": "^2.9.3"
+  }
+}
