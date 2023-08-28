@@ -31,7 +31,7 @@
 .res-card {
   margin: 5px;
   padding: 5px;
-  width: 200px;
+  width: 500px;
 }
 
 .res-card:hover {
@@ -58,7 +58,7 @@
 }
 
 .shimmer-card {
-  width: 200px;
+  width: 500px;
   height: 450px;
   margin: 20px;
   background-color: #f0f0f0;
@@ -67,4 +67,9 @@
 .login {
   margin: 0, 20px;
   cursor: pointer;
+}
+
+.link {
+  color: black;
+  text-decoration: none;
 }
