@@ -73,3 +73,10 @@
   color: black;
   text-decoration: none;
 }
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  padding-right: 200px;
+  padding-left: 200px;
+}
