@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   const [restrauntList, setRestrauntList] = useState([]);
@@ -33,7 +34,13 @@ const Body = () => {
   //   return <Shimmer />;
   // }
 
-  return restrauntList === undefined || restrauntList.length === 0 ? (
+  const onlineStatus = useOnlineStatus();
+
+  if (!onlineStatus) {
+    return <h1>Uh!! oh!! No Internet Connection 😣</h1>;
+  }
+
+  return restrauntList === undefined ? (
     <Shimmer />
   ) : (
     <div className="body">
