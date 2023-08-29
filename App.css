@@ -80,3 +80,8 @@
   padding-right: 200px;
   padding-left: 200px;
 }
+
+.user-card {
+  padding: 10px;
+  border: 1px solid black;
+}
