@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
@@ -8,6 +8,8 @@ const Body = () => {
   const [restrauntList, setRestrauntList] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [filteredList, setFilteredList] = useState([]);
+
+  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
 
   useEffect(() => {
     fetchData();
@@ -19,16 +21,16 @@ const Body = () => {
     );
     const jsonData = await data.json();
     setRestrauntList(
-      jsonData?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
+      jsonData?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
     setFilteredList(
-      jsonData?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
+      jsonData?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
   };
 
-  const topRated = restrauntList?.filter((res) => res.info.avgRating >= 4.0);
+  const topRated = restrauntList?.filter((res) => res.info.avgRating >= 4);
   // conditional rendering
   // if (restrauntList.length === 0) {
   //   return <Shimmer />;
@@ -40,14 +42,14 @@ const Body = () => {
     return <h1>Uh!! oh!! No Internet Connection 😣</h1>;
   }
 
-  return restrauntList === undefined ? (
+  return restrauntList === undefined || restrauntList.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="filter flex">
+        <div className="search m-4 p-4">
           <input
-            className="search-box"
+            className="border border-solid border-black"
             type="text"
             value={searchText}
             onChange={(e) => {
@@ -55,6 +57,7 @@ const Body = () => {
             }}
           />
           <button
+            className="px-4 py-2 bg-green-100 m-4 rounded-lg"
             onClick={() => {
               const searchData = restrauntList?.filter((res) => {
                 return res.info.name
@@ -67,18 +70,19 @@ const Body = () => {
             Search
           </button>
         </div>
-        <button className="filter" onClick={() => setRestrauntList(topRated)}>
-          Top Rated
-        </button>
+        <div className="search m-4 p-4 flex items-center">
+          <button onClick={() => setRestrauntList(topRated)}>Top Rated</button>
+        </div>
       </div>
-      <div className="res-container">
+
+      <div className="flex flex-wrap">
         {filteredList?.map((restaurant) => (
-          <Link
-            className="link"
-            key={restaurant.info.id}
-            to={"/menu/" + restaurant.info.id}
-          >
-            <RestaurantCard resData={restaurant} />
+          <Link key={restaurant.info.id} to={"/menu/" + restaurant.info.id}>
+            {restaurant.info.isOpen ? (
+              <RestaurantCardPromoted resData={restaurant} />
+            ) : (
+              <RestaurantCard resData={restaurant} />
+            )}
           </Link>
         ))}
       </div>

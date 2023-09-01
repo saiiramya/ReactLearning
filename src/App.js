@@ -12,7 +12,7 @@ const Grocery = lazy(() => import("./components/Grocery"));
 
 const AppLayout = () => {
   return (
-    <div className="app">
+    <div>
       <Header />
       <Outlet />
     </div>
@@ -40,7 +40,6 @@ const appRouter = createBrowserRouter([
         path: "/grocery",
         element: (
           <Suspense fallback={<h1>loading....</h1>}>
-            {" "}
             <Grocery />
           </Suspense>
         ),
